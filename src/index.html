@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+  <title>Ping AWS | Calcula la latencia aproximada desde su navegador a las regiones de AWS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="lib/normalize.css/normalize.css">
+  <link rel="stylesheet" href="lib/milligram/dist/milligram.min.css">
+  <script type="text/javascript" src="scripts/main.js"></script>
+</head>
+
+<body>
+  <main class="wrapper">
+    <section class="container">
+      <div class="row">
+        <div class="column column-80 column-offset-10">
+          <div class="row">
+            <div class="column-80">
+              <h3 class="title"><img src="imgs/logo_pingaws.png">Ping Amazon Web Services</h3>
+              <p>Click el botón "Ping AWS" para calcular la latencia aproximada desde su navegador a las regiones de
+                AWS.
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <table id="awsRegions">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Código</th>
+                    <th><button class="button">Ping AWS</button></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                  <tr>
+                    <td>
+                      <div id="pixelPing" style="display: none;"></div>
+                      <button class="button">Ping AWS</button>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      <section class="container">
+        <div class="row">
+          <div class="column column-80 column-offset-10">
+            <p>Desarrollado con ♥ desde Perú por <a target="_blank" href="https://www.linkedin.com/in/jcramireztello/"
+                title="linkedIn Jose Ramirez Tello">@jcramireztello</a>. GitHub <a target="_blank"
+                href="https://github.com/neotrons/pingaws.com" title="Github PingAWS.com">pingAWS.com</a>.</p>
+          </div>
+        </div>
+      </section>
+    </footer>
+  </main>
+</body>
+
+</html>
