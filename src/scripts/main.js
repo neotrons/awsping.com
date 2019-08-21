@@ -172,3 +172,28 @@ var createTable = () => {
         newRow.insertCell(2).innerHTML = "";
     });
 }
+
+var ping = (pixel, regions, index = 0) => {
+    if (Object.keys(regions).length > index) {
+        var region = regions[index];
+        var img = document.createElement("img");
+        var latCell = document.getElementById(region.region.code).getElementsByTagName('td')[2];
+        latCell.innerHTML = '<b>ping...</b>';
+        img.onerror = () => {
+            var endTime = (new Date()).getTime();
+            var elapsed = endTime - startTime;
+            latCell.innerHTML = `${elapsed.toString()} ms`;
+            index++;
+            ping(pixel, regions, index);
+        }
+        pixel.innerHTML = "";
+        pixel.appendChild(img);
+        var startTime = (new Date()).getTime();
+        img.src = region.endpoint;
+    }
+}
+
+var startPing = () => {
+    var pixel = document.getElementById("pixelPing");
+    ping(pixel, awsRegions);
+}
