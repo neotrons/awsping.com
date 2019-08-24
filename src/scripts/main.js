@@ -162,6 +162,7 @@ var awsRegions = [
     }
 ];
 
+var lowerElapsed;
 var createTable = () => {
     var tableRef = document.getElementById('awsRegions').getElementsByTagName('tbody')[0];
     awsRegions.forEach(function (region) {
@@ -173,6 +174,15 @@ var createTable = () => {
     });
 }
 
+var getLowerElapsed = (region, elapsed) => {
+    return {"code": region.region.code, "elapsed": elapsed};
+}
+
+var setClassLowerElapsed = (regionCode, className, action) => {
+    var tdElapsed = document.getElementById(regionCode).getElementsByTagName('td')[2];
+    tdElapsed.classList[action](className);
+}
+
 var ping = (pixel, regions, index = 0) => {
     if (Object.keys(regions).length > index) {
         var region = regions[index];
@@ -182,6 +192,13 @@ var ping = (pixel, regions, index = 0) => {
         img.onerror = () => {
             var endTime = (new Date()).getTime();
             var elapsed = endTime - startTime;
+            if (lowerElapsed) {
+                if (lowerElapsed.elapsed > elapsed) {
+                    lowerElapsed = getLowerElapsed(region, elapsed);
+                }
+            }else {
+                lowerElapsed = getLowerElapsed(region, elapsed);
+            }
             latCell.innerHTML = `${elapsed.toString()} ms`;
             index++;
             ping(pixel, regions, index);
@@ -190,10 +207,15 @@ var ping = (pixel, regions, index = 0) => {
         pixel.appendChild(img);
         var startTime = (new Date()).getTime();
         img.src = region.endpoint;
+    }else {
+        setClassLowerElapsed(lowerElapsed.code, 'lower_elapsed', 'add');
     }
 }
 
 var startPing = () => {
     var pixel = document.getElementById("pixelPing");
+    if (lowerElapsed) { 
+        setClassLowerElapsed(lowerElapsed.code, 'lower_elapsed', 'remove');
+    }
     ping(pixel, awsRegions);
 }
